@@ -5,6 +5,12 @@ import { Inter, Inclusive_Sans } from "next/font/google";
 const inter = Inter({
   subsets: ["latin"],
   weight: ["300", "400", "500", "600"],
+  variable: "--font-inter",
+});
+const inclusiveSans = Inclusive_Sans({
+  subsets: ["latin"],
+  weight: ["400"],
+  variable: "--font-inclusive-sans",
 });
 
 export const metadata: Metadata = {
@@ -19,7 +25,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={`${inclusiveSans.className} dark`}>{children}</body>
     </html>
   );
 }

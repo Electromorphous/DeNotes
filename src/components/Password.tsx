@@ -18,7 +18,7 @@ function Password({ props }: InputProps) {
       />
       <button
         type="button"
-        className="absolute top-2 right-1 hover:bg-zinc-800 rounded-xl"
+        className="absolute top-2 right-1 rounded-xl hover:bg-zinc-800  focus:outline-none focus:bg-zinc-800"
         style={{ padding: 7 }}
         onClick={() => setVisible((prev) => !prev)}
       >

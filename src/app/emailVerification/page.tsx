@@ -1,6 +1,7 @@
 "use client";
 import axios from "axios";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 import { useState, useEffect } from "react";
 
 function EmailVerification() {
@@ -35,11 +36,18 @@ function EmailVerification() {
     <div className="flex flex-col justify-center items-center min-h-screen">
       <h1 className="text-4xl">Email Verification</h1>
       <h2 className="p-2">
-        {loading
-          ? "Verifying email..."
-          : success
-          ? "Your Email has been verified. Redirecting..."
-          : "An error occured while verifying your email."}
+        {loading ? (
+          "Verifying email..."
+        ) : success ? (
+          "Your Email has been verified. Redirecting..."
+        ) : (
+          <>
+            An error occured while verifying your email. Go to{" "}
+            <Link className="underline text-blue-400" href="/">
+              home page
+            </Link>
+          </>
+        )}
       </h2>
     </div>
   );
