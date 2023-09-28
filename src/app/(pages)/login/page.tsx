@@ -31,14 +31,14 @@ function Login() {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen">
+    <div className="flex items-center justify-center min-h-screen bg-zinc-200 text-zinc-950 dark:bg-zinc-950 dark:text-zinc-200">
       <form
         onSubmit={handleSubmit}
-        className="flex flex-col border border-zinc-500 rounded-lg px-6 py-4"
+        className="flex flex-col border rounded-lg px-6 py-4 border-zinc-950 dark:border-zinc-200"
       >
         <h1 className="text-lg mb-1 text-center">Login</h1>
 
-        <label htmlFor="Email" className="text-zinc-300 text-sm">
+        <label htmlFor="Email" className="text-sm">
           Email
         </label>
         <Input
@@ -54,7 +54,7 @@ function Login() {
           }}
         />
 
-        <label htmlFor="password" className="text-zinc-300 text-sm">
+        <label htmlFor="password" className="text-sm">
           Password
         </label>
         <Password

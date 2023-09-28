@@ -1,14 +1,13 @@
 "use client";
-import ToggleTheme from "@/components/ToggleTheme";
+import ToggleTheme from "@/components/ThemeButton";
 import Link from "next/link";
 
 export default function Home() {
   return (
-    <main className="relative flex items-center justify-center text-center min-h-screen bg-zinc-100 text-black dark:bg-zinc-950 dark:text-zinc-200">
+    <main className="relative flex items-center justify-center text-center min-h-screen bg-zinc-200 text-zinc-950 dark:bg-zinc-950 dark:text-zinc-200">
       <div className="absolute top-7 right-7 flex gap-7">
         <Link href="/login">Login</Link>
         <Link href="/signup">Signup</Link>
-
         <ToggleTheme />
       </div>
       <div className="-mt-12">

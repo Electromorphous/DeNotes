@@ -1,7 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import Image from "next/image";
-import ToggleTheme from "./ToggleTheme";
+import ToggleTheme from "./ThemeButton";
 
 function Header() {
   return (
