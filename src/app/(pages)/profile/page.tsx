@@ -5,25 +5,14 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 import { tokenType } from "@/types/enums";
 import Header from "@/components/Header";
+import { useUser } from "@/contexts/UserProvider";
+import Loader from "@/components/Loader";
 
 function Profile() {
-  const [userData, setUserData] = useState({
-    name: "",
-    email: "",
-    isVerified: true,
-  });
   const [verifyButtonClicked, setVerifyButtonClicked] = useState(false);
   const [loading, setLoading] = useState(false);
   const router = useRouter();
-
-  const getUserData = async () => {
-    await axios
-      .get("/api/users/profile")
-      .then((res) => {
-        setUserData(res.data.user);
-      })
-      .catch((err) => console.error(err.response.data.error));
-  };
+  const user = useUser();
 
   const logout = async () => {
     setLoading(true);
@@ -43,7 +32,7 @@ function Profile() {
     // send verification mail
     await axios
       .post("/api/users/sendEmail", {
-        email: userData.email,
+        email: user.email,
         emailType: tokenType.VERIFY_USER,
       })
       .then((res) => {
@@ -52,16 +41,12 @@ function Profile() {
       .catch((err) => console.error(err.response.data.message));
   };
 
-  useEffect(() => {
-    getUserData();
-  }, []);
-
   return (
     <>
       <Header
         items={
           <>
-            {userData.isVerified ? (
+            {user.isVerified ? (
               <></>
             ) : (
               <Button
@@ -80,22 +65,26 @@ function Profile() {
         <div className="container mx-auto">
           <h1 className="text-3xl mb-16 text-center">Profile page</h1>
 
-          <table className="text-lg w-full max-w-xs mx-auto">
-            <tbody>
-              <tr>
-                <td>Name</td>
-                <td className="text-right">{userData.name}</td>
-              </tr>
-              <tr>
-                <td>Email</td>
-                <td className="text-right">{userData.email}</td>
-              </tr>
-              <tr>
-                <td>isVerified</td>
-                <td className="text-right">{userData.isVerified.toString()}</td>
-              </tr>
-            </tbody>
-          </table>
+          {user.email ? (
+            <table className="text-lg w-full max-w-xs mx-auto">
+              <tbody>
+                <tr>
+                  <td>Name</td>
+                  <td className="text-right">{user.name}</td>
+                </tr>
+                <tr>
+                  <td>Email</td>
+                  <td className="text-right">{user.email}</td>
+                </tr>
+                <tr>
+                  <td>isVerified</td>
+                  <td className="text-right">{user.isVerified.toString()}</td>
+                </tr>
+              </tbody>
+            </table>
+          ) : (
+            <Loader />
+          )}
         </div>
       </main>
     </>
