@@ -8,7 +8,7 @@ import Header from "@/components/Header";
 
 function Profile() {
   const [userData, setUserData] = useState({
-    username: "",
+    name: "",
     email: "",
     isVerified: true,
   });
@@ -83,8 +83,8 @@ function Profile() {
           <table className="text-lg w-full max-w-xs mx-auto">
             <tbody>
               <tr>
-                <td>Username</td>
-                <td className="text-right">{userData.username}</td>
+                <td>Name</td>
+                <td className="text-right">{userData.name}</td>
               </tr>
               <tr>
                 <td>Email</td>

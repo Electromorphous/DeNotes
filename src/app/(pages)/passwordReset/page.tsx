@@ -46,14 +46,14 @@ function PasswordReset() {
   }, []);
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-light-primary text-dark-primary dark:bg-dark-primary dark:text-light-primary">
+    <main className="flex items-center justify-center min-h-screen bg-light-primary text-dark-primary dark:bg-dark-primary dark:text-light-primary">
       <div className="absolute top-5 right-6 flex gap-7">
         <ThemeButton />
       </div>
 
       <form
         onSubmit={handleSubmit}
-        className="flex flex-col border rounded-lg px-6 py-4 border-dark-primary dark:border-light-primary"
+        className="flex flex-col border rounded-lg px-6 py-4 w-full max-w-sm border-dark-primary dark:border-light-primary"
       >
         <h1 className="text-lg mb-1 text-center">Reset Password</h1>
 
@@ -93,7 +93,7 @@ function PasswordReset() {
           {loading ? "Changing Password..." : "Reset Password"}
         </Button>
       </form>
-    </div>
+    </main>
   );
 }
 

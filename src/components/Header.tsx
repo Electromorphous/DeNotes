@@ -17,7 +17,7 @@ function Header({ items = <></> }: HeaderPropsType) {
       flex items-center justify-between"
       >
         <Link href="/dashboard" className="text-4xl hover:underline">
-          DeNotes
+          Notes
         </Link>
         <div className="flex justify-center items-center gap-3">
           {items}

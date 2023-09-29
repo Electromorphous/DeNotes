@@ -11,7 +11,7 @@ import ThemeButton from "@/components/ThemeButton";
 function Signup() {
   const [user, setUser] = useState({
     email: "",
-    username: "",
+    name: "",
     password: "",
     confirmPassword: "",
   });
@@ -40,14 +40,14 @@ function Signup() {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-light-primary text-dark-primary dark:bg-dark-primary dark:text-light-primary">
+    <main className="flex items-center justify-center min-h-screen bg-light-primary text-dark-primary dark:bg-dark-primary dark:text-light-primary">
       <div className="absolute top-5 right-6 flex gap-7">
         <ThemeButton />
       </div>
 
       <form
         onSubmit={handleSubmit}
-        className="flex flex-col border rounded-lg px-6 py-4 border-dark-primary dark:border-light-primary"
+        className="flex flex-col border rounded-lg px-6 py-4 w-full max-w-sm border-dark-primary dark:border-light-primary"
       >
         <h1 className="text-lg mb-1 text-center">Signup</h1>
 
@@ -67,18 +67,18 @@ function Signup() {
           }}
         />
 
-        <label htmlFor="username" className="text-sm">
-          Username
+        <label htmlFor="name" className="text-sm">
+          Name
         </label>
         <Input
           props={{
             required: true,
             type: "text",
-            id: "username",
-            name: "username",
-            value: user.username,
+            id: "name",
+            name: "name",
+            value: user.name,
             onChange: (e: any) =>
-              setUser((prev) => ({ ...prev, username: e.target.value })),
+              setUser((prev) => ({ ...prev, name: e.target.value })),
           }}
         />
 
@@ -117,7 +117,7 @@ function Signup() {
           Already have an account
         </Link>
       </form>
-    </div>
+    </main>
   );
 }
 
