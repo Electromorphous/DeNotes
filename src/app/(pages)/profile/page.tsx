@@ -4,12 +4,12 @@ import Button from "@/components/Button";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import { tokenType } from "@/types/enums";
+import Header from "@/components/Header";
 
 function Profile() {
   const [userData, setUserData] = useState({
     username: "",
     email: "",
-    isAdmin: false,
     isVerified: true,
   });
   const [verifyButtonClicked, setVerifyButtonClicked] = useState(false);
@@ -57,33 +57,48 @@ function Profile() {
   }, []);
 
   return (
-    <div className="container p-4 mx-auto">
-      <div className="flex justify-between items-start ">
-        <div className="info">
-          <h1 className="text-2xl mb-6">Profile page</h1>
-
-          <p>Username: {userData.username}</p>
-          <p>Email: {userData.email}</p>
-          <p>isAdmin: {userData.isAdmin.toString()}</p>
-          <p>isVerified: {userData.isVerified.toString()}</p>
-        </div>
-
-        <div className="flex gap-2">
-          {userData.isVerified ? (
-            <></>
-          ) : (
-            <Button
-              props={{ onClick: verifyEmail, disabled: verifyButtonClicked }}
-            >
-              {verifyButtonClicked ? "Email Sent" : "Verify Email"}
+    <>
+      <Header
+        items={
+          <>
+            {userData.isVerified ? (
+              <></>
+            ) : (
+              <Button
+                props={{ onClick: verifyEmail, disabled: verifyButtonClicked }}
+              >
+                {verifyButtonClicked ? "Email Sent" : "Verify Email"}
+              </Button>
+            )}
+            <Button props={{ onClick: logout, disabled: loading }}>
+              {loading ? "Logging out..." : "Logout"}
             </Button>
-          )}
-          <Button props={{ onClick: logout, disabled: loading }}>
-            {loading ? "Logging out..." : "Logout"}
-          </Button>
+          </>
+        }
+      />
+      <main className="pt-28 min-h-screen bg-light-primary text-dark-primary dark:bg-dark-primary dark:text-light-primary">
+        <div className="container mx-auto">
+          <h1 className="text-3xl mb-16 text-center">Profile page</h1>
+
+          <table className="text-lg w-full max-w-xs mx-auto">
+            <tbody>
+              <tr>
+                <td>Username</td>
+                <td className="text-right">{userData.username}</td>
+              </tr>
+              <tr>
+                <td>Email</td>
+                <td className="text-right">{userData.email}</td>
+              </tr>
+              <tr>
+                <td>isVerified</td>
+                <td className="text-right">{userData.isVerified.toString()}</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
-      </div>
-    </div>
+      </main>
+    </>
   );
 }
 

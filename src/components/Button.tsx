@@ -6,7 +6,7 @@ type ButtonProps = {
 function Button({ children, props }: ButtonProps) {
   return (
     <button
-      className="px-3 py-1 rounded-lg my-3 outline-none transition-all
+      className="px-2.5 py-1 rounded-lg my-3 outline-none transition-all
       bg-transparent border border-dark-primary hover:bg-dark-primary hover:text-light-primary
       focus:bg-dark-primary focus:text-light-primary
       disabled:bg-zinc-400 disabled:border-zinc-400 disabled:text-black
@@ -15,7 +15,7 @@ function Button({ children, props }: ButtonProps) {
       dark:disabled:bg-zinc-700 dark:disabled:border-zinc-700 dark:disabled:text-white"
       {...props}
     >
-      <strong>{children}</strong>
+      {children}
     </button>
   );
 }

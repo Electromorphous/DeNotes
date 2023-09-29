@@ -1,13 +1,29 @@
 "use client";
-import { useState, useEffect } from "react";
-import Image from "next/image";
-import ToggleTheme from "./ThemeButton";
+import ThemeButton from "./ThemeButton";
+import Link from "next/link";
 
-function Header() {
+type HeaderPropsType = {
+  items?: React.ReactNode;
+};
+
+function Header({ items = <></> }: HeaderPropsType) {
   return (
-    <div className="flex items-center justify-between dark:bg-black dark:text-white">
-      <h1 className="text-4xl">Notes</h1>
-      <ToggleTheme />
+    <div
+      className="bg-light-primary text-dark-primary dark:bg-dark-primary dark:text-light-primary
+    fixed top-0 left-0 right-0 border-b border-b-dark-primary dark:border-b-light-primary"
+    >
+      <div
+        className="container mx-auto px-5 py-1 
+      flex items-center justify-between"
+      >
+        <Link href="/dashboard" className="text-4xl hover:underline">
+          DeNotes
+        </Link>
+        <div className="flex justify-center items-center gap-3">
+          {items}
+          <ThemeButton />
+        </div>
+      </div>
     </div>
   );
 }

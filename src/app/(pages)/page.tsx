@@ -11,7 +11,7 @@ export default function Home() {
         <ThemeButton />
       </div>
       <div className="-mt-12">
-        <h1 className="text-6xl mb-4">DeNotes</h1>
+        {/* <h1 className="text-6xl mb-4">DeNotes</h1>
         <p className="text-lg">
           The world's first fully decentralised note-taking app
           <br />
@@ -19,10 +19,10 @@ export default function Home() {
           <Link className="underline" href="https://ipfs.io" target="_blank">
             Interplanetary File System
           </Link>
-        </p>
+        </p> */}
 
-        {/* <h1 className="text-6xl mb-4">Notes</h1>
-        <p className="text-xl">Take meaningful notes</p> */}
+        <h1 className="text-6xl mb-4">Notes</h1>
+        <p className="text-xl">Take meaningful notes</p>
       </div>
     </main>
   );
