@@ -3,6 +3,14 @@ import { NextResponse, NextRequest } from "next/server";
 export function middleware(request: NextRequest) {
   const path = request.nextUrl.pathname;
   const isPublicPath = publicPaths.includes(path);
+  const isPrivatePath = privatePaths.includes(path);
+
+  // if path is neither public nor private then anyone can visit so carry on
+  if (!isPublicPath && !isPrivatePath) {
+    return NextResponse.next();
+  }
+
+  // checking if logged in or not by reading token
   const token = request.cookies.get("token")?.value || ""; // if token is found then return its value else return ""
 
   // if user wants a public path and they are logged in
@@ -14,7 +22,6 @@ export function middleware(request: NextRequest) {
     return NextResponse.redirect(new URL("/login", request.nextUrl));
   }
   // if any other case just carry on
-
   return NextResponse.next();
 }
 
@@ -39,3 +46,6 @@ const publicPaths = [
   "/forgotPassword",
   "/passwordReset",
 ];
+
+// these are paths which the user can visit only when logged in, cannot visit when logged out.
+const privatePaths = ["/profile", "/profile/:path*"];

@@ -3,6 +3,7 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { useState, useEffect } from "react";
+import ThemeButton from "@/components/ThemeButton";
 
 function EmailVerification() {
   const [token, setToken] = useState("");
@@ -33,7 +34,11 @@ function EmailVerification() {
   }, [token]);
 
   return (
-    <div className="flex flex-col justify-center items-center min-h-screen">
+    <div className="flex flex-col items-center justify-center min-h-screen bg-light-primary text-dark-primary dark:bg-dark-primary dark:text-light-primary">
+      <div className="absolute top-7 right-7 flex gap-7">
+        <ThemeButton />
+      </div>
+
       <h1 className="text-4xl">Email Verification</h1>
       <h2 className="p-2">
         {loading ? (
@@ -43,9 +48,10 @@ function EmailVerification() {
         ) : (
           <>
             An error occured while verifying your email. Go to{" "}
-            <Link className="underline text-blue-400" href="/">
+            <Link className="text-blue-700 dark:text-blue-400" href="/">
               home page
             </Link>
+            .
           </>
         )}
       </h2>

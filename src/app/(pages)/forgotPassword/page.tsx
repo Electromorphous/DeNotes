@@ -7,6 +7,7 @@ import Button from "@/components/Button";
 import Input from "@/components/Input";
 import Password from "@/components/Password";
 import { tokenType } from "@/types/enums";
+import ThemeButton from "@/components/ThemeButton";
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -32,14 +33,18 @@ function Login() {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen">
+    <div className="flex items-center justify-center min-h-screen bg-light-primary text-dark-primary dark:bg-dark-primary dark:text-light-primary">
+      <div className="absolute top-7 right-7 flex gap-7">
+        <ThemeButton />
+      </div>
+
       <form
         onSubmit={handleSubmit}
-        className="flex flex-col border border-zinc-500 rounded-lg px-6 py-4"
+        className="flex flex-col border rounded-lg px-6 py-4 border-dark-primary dark:border-light-primary"
       >
         <h1 className="text-lg mb-1 text-center">Reset Your Password</h1>
 
-        <label htmlFor="Email" className="text-zinc-300 text-sm">
+        <label htmlFor="Email" className="text-sm">
           Email
         </label>
         <Input

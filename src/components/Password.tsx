@@ -13,12 +13,16 @@ function Password({ props }: InputProps) {
     <div className="relative">
       <input
         type={visible ? "text" : "password"}
-        className="px-4 py-2 bg-transparent border border-zinc-500 rounded-md mb-4 mt-1 outline-none focus:border-zinc-200"
+        className="px-4 py-2 rounded-md mb-4 mt-1 transition-all outline-none bg-transparent border
+        border-zinc-500 focus:border-dark-primary
+        dark:border-zinc-600 dark:focus:border-light-primary"
         {...props}
       />
       <button
         type="button"
-        className="absolute top-2 right-1 rounded-xl hover:bg-zinc-800  focus:outline-none focus:bg-zinc-800"
+        className="absolute top-2 right-1 rounded-xl outline-none
+        hover:bg-light-secondary focus:bg-light-secondary
+        dark:hover:bg-dark-secondary dark:focus:bg-dark-secondary"
         style={{ padding: 7 }}
         onClick={() => setVisible((prev) => !prev)}
       >
