@@ -5,7 +5,7 @@ import Link from "next/link";
 export default function Home() {
   return (
     <main className="relative flex items-center justify-center text-center min-h-screen bg-light-primary text-dark-primary dark:bg-dark-primary dark:text-light-primary">
-      <div className="absolute top-7 right-7 flex gap-7">
+      <div className="absolute top-5 right-6 flex gap-7 items-center justify-center">
         <Link href="/login">Login</Link>
         <Link href="/signup">Signup</Link>
         <ThemeButton />

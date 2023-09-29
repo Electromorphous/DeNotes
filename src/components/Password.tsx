@@ -20,7 +20,7 @@ function Password({ props }: InputProps) {
       />
       <button
         type="button"
-        className="absolute top-2 right-1 rounded-xl outline-none
+        className="absolute top-2 right-1 rounded-xl outline-none transition-all
         hover:bg-light-secondary focus:bg-light-secondary
         dark:hover:bg-dark-secondary dark:focus:bg-dark-secondary"
         style={{ padding: 7 }}

@@ -7,7 +7,12 @@ function ThemeButton() {
   const toggleTheme = useThemeUpdate();
 
   return (
-    <button onClick={toggleTheme}>
+    <button
+      onClick={toggleTheme}
+      className="rounded-full outline-none p-2 transition-all
+    hover:bg-light-secondary focus:bg-light-secondary
+    dark:hover:bg-dark-secondary dark:focus:bg-dark-secondary"
+    >
       <Image
         src={dark ? "/assets/sun.svg" : "/assets/moon.svg"}
         width={30}
