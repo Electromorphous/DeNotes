@@ -15,7 +15,7 @@ function Dashboard() {
           </Button>
         }
       />
-      <main className="p-4 pt-20 min-h-screen bg-light-primary text-dark-primary dark:bg-dark-primary dark:text-light-primary">
+      <main className="p-4 pt-20 min-h-screen transition-all bg-light-primary text-dark-primary dark:bg-dark-primary dark:text-light-primary">
         Dashboard
       </main>
     </>

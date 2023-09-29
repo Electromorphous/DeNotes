@@ -33,7 +33,7 @@ function Login() {
   };
 
   return (
-    <main className="flex items-center justify-center min-h-screen bg-light-primary text-dark-primary dark:bg-dark-primary dark:text-light-primary">
+    <main className="flex items-center justify-center min-h-screen transition-all bg-light-primary text-dark-primary dark:bg-dark-primary dark:text-light-primary">
       <div className="absolute top-5 right-6 flex gap-7">
         <ThemeButton />
       </div>

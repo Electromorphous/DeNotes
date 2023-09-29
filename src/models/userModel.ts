@@ -9,6 +9,7 @@ const userSchema = new mongoose.Schema({
   email: {
     type: String,
     required: [true, "Please provide an email"],
+    lowercase: true,
     unique: true,
   },
   password: {
@@ -18,6 +19,30 @@ const userSchema = new mongoose.Schema({
   isVerified: {
     type: Boolean,
     default: false,
+  },
+  notes: {
+    type: [
+      {
+        title: {
+          type: String,
+          required: [true, "Please provide a title"],
+        },
+        cid: {
+          type: String,
+          required: [true, "Please provide a CID"],
+        },
+        createdAt: {
+          type: Date,
+          immutable: true,
+          default: () => Date.now(),
+        },
+        updatedAt: {
+          type: Date,
+          default: () => Date.now(),
+        },
+      },
+    ],
+    require: [true, "Please provide notes array"],
   },
   forgotPasswordToken: String,
   forgotPasswordTokenExpiration: Date || null,

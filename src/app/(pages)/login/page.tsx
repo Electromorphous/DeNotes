@@ -25,14 +25,14 @@ function Login() {
       .post("/api/users/login", user)
       .then((res) => {
         console.log("Success", res.data);
-        router.push("/profile");
+        router.push("/dashboard");
       })
       .catch((err) => console.error(err.response.data.message))
       .finally(() => setLoading(false));
   };
 
   return (
-    <main className="flex items-center justify-center min-h-screen bg-light-primary text-dark-primary dark:bg-dark-primary dark:text-light-primary">
+    <main className="flex items-center justify-center min-h-screen transition-all bg-light-primary text-dark-primary dark:bg-dark-primary dark:text-light-primary">
       <div className="absolute top-5 right-6 flex gap-7">
         <ThemeButton />
       </div>
