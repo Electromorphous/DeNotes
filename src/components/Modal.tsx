@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, SetStateAction, useEffect } from "react";
 import Image from "next/image";
 import Button from "./Button";
 import NoteDataType from "@/types/noteDataType";
@@ -20,6 +20,18 @@ function Modal({
   handleSave,
   loading,
 }: Props) {
+  useEffect(() => {
+    const handleEsc = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        handleClose();
+      }
+    };
+    window.addEventListener("keydown", handleEsc);
+    return () => {
+      window.removeEventListener("keydown", handleEsc);
+    };
+  }, []);
+
   return (
     <>
       <div
@@ -67,16 +79,19 @@ function Modal({
 
         <div className="flex items-center justify-between">
           <p>Last update: {noteData?.updatedAt || "Now"}</p>
-          <Button
-            props={{
-              onClick: {
-                //   noteData.path.slice(0, -4) && noteData.content ? handleSave : () => {}
-              },
-              disabled: loading,
-            }}
-          >
-            Save
-          </Button>
+          <p className="text-zinc-500">esc to close</p>
+          <div className="flex items-center justify-center gap-3">
+            <Button
+              props={{
+                onClick: {
+                  //   noteData.path.slice(0, -4) && noteData.content ? handleSave : () => {}
+                },
+                disabled: loading,
+              }}
+            >
+              Save
+            </Button>
+          </div>
         </div>
       </div>
     </>

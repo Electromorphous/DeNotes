@@ -10,6 +10,7 @@ function Textarea({ props }: TextareaProps) {
         border-zinc-500 focus:border-dark-primary
         dark:border-zinc-600 dark:focus:border-light-primary
         ${props.className}`}
+      rows={7}
     />
   );
 }
