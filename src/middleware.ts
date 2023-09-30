@@ -10,15 +10,15 @@ export function middleware(request: NextRequest) {
     return NextResponse.next();
   }
 
-  // checking if logged in or not by reading token
-  const token = request.cookies.get("token")?.value || ""; // if token is found then return its value else return ""
+  // checking if logged in or not by reading jwt_auth_token
+  const jwt_auth_token = request.cookies.get("jwt_auth_token")?.value || ""; // if jwt_auth_token is found then return its value else return ""
 
   // if user wants a public path and they are logged in
-  if (isPublicPath && !!token) {
+  if (isPublicPath && !!jwt_auth_token) {
     return NextResponse.redirect(new URL("/home", request.nextUrl));
   }
   // if user wants a private path and they are logged out
-  if (isPrivatePath && !token) {
+  if (isPrivatePath && !jwt_auth_token) {
     return NextResponse.redirect(new URL("/login", request.nextUrl));
   }
   // if any other case just carry on

@@ -8,6 +8,7 @@ import {
 } from "react";
 import axios from "axios";
 import UserDataType from "@/types/userDataType";
+// import Cookies from "universal-cookie";
 
 type PropsType = {
   children: React.ReactNode;
@@ -28,18 +29,24 @@ export function useUserUpdate() {
 function UserProvider({ children }: PropsType) {
   const [user, setUser] = useState<UserDataType | null>(null);
 
-  // const getUserData = async () => {
-  //   await axios
-  //     .get("/api/users/getUserFromToken")
-  //     .then((res) => {
-  //       setUser(res.data.user);
-  //     })
-  //     .catch((err) => console.error(err.response));
-  // };
-
+  // less secure because cookies should be allowed to be accessed by client
+  // const jwt_auth_token = new Cookies().get("jwt_auth_token");
   // useEffect(() => {
-  //   getUserData();
-  // }, []);
+  //   if (jwt_auth_token && !user) getUserData();
+  // }, [user, jwt_auth_token]);
+
+  const getUserData = async () => {
+    await axios
+      .get("/api/users/getUserFromToken")
+      .then((res) => {
+        setUser(res.data.user);
+      })
+      .catch((err) => console.error(err.response));
+  };
+
+  useEffect(() => {
+    if (!user) getUserData();
+  }, [user]);
 
   return (
     <UserContext.Provider value={user}>

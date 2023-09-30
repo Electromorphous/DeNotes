@@ -35,18 +35,19 @@ export async function POST(request: NextRequest) {
       { status: 201 }
     );
 
-    // const tokenData = {
-    //   id: user._id,
-    //   name: user.name,
-    //   email,
-    // };
+    // create a JWT in the cookies of the user's browser so that
+    // we can keep them logged in even after the frontend restarts
+    const jwtTokenData = {
+      id: user._id,
+    };
 
-    // const token = jwt.sign(tokenData, process.env.TOKEN_SECRET!, {
-    //   expiresIn: "1d",
-    // });
+    const jwt_auth_token = jwt.sign(jwtTokenData, process.env.JWT_AUTH_SECRET!);
 
-    // add cookies with token in the response
-    // response.cookies.set("token", token, { httpOnly: true, sameSite: "lax" });
+    // add cookies with jwt_auth_token in the response
+    response.cookies.set("jwt_auth_token", jwt_auth_token, {
+      httpOnly: true,
+      sameSite: "lax",
+    });
 
     return response;
   } catch (err) {

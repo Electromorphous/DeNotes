@@ -7,6 +7,7 @@ import { tokenType } from "@/types/enums";
 import Header from "@/components/Header";
 import { useUser } from "@/contexts/UserProvider";
 import Loader from "@/components/Loader";
+// import Cookies from "universal-cookie";
 
 function Profile() {
   const [verifyButtonClicked, setVerifyButtonClicked] = useState(false);
@@ -25,6 +26,13 @@ function Profile() {
       .catch((err) => console.error(err.response.data.message))
       .finally(() => setLoading(false));
   };
+
+  // less secure because cookies should be allowed to be accessed by client
+  // const logout = () => {
+  //   const cookies = new Cookies();
+  //   cookies.remove("jwt_auth_token");
+  //   router.push("/login");
+  // };
 
   const verifyEmail = async () => {
     setVerifyButtonClicked(true);

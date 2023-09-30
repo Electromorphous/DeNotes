@@ -6,7 +6,7 @@ export async function GET() {
       { message: "Logout successful" },
       { status: 200 }
     );
-    res.cookies.set("token", "", { httpOnly: true, sameSite: "lax" });
+    res.cookies.set("jwt_auth_token", "", { httpOnly: true, sameSite: "lax" });
     return res;
   } catch (err) {
     return NextResponse.json({ message: err }, { status: 500 });
