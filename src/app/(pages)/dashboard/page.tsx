@@ -10,9 +10,12 @@ function Dashboard() {
     <>
       <Header
         items={
-          <Button props={{ onClick: () => router.push("/profile") }}>
-            Profile
-          </Button>
+          <>
+            <Button props={{ onClick: () => {} }}>New</Button>
+            <Button props={{ onClick: () => router.push("/profile") }}>
+              Profile
+            </Button>
+          </>
         }
       />
       <main className="p-7 pt-20 min-h-screen transition-all bg-light-primary text-dark-primary dark:bg-dark-primary dark:text-light-primary">
