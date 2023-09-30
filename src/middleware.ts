@@ -15,7 +15,7 @@ export function middleware(request: NextRequest) {
 
   // if user wants a public path and they are logged in
   if (isPublicPath && !!token) {
-    return NextResponse.redirect(new URL("/dashboard", request.nextUrl));
+    return NextResponse.redirect(new URL("/home", request.nextUrl));
   }
   // if user wants a private path and they are logged out
   if (isPrivatePath && !token) {
@@ -28,7 +28,7 @@ export function middleware(request: NextRequest) {
 export const config = {
   matcher: [
     "/",
-    "/dashboard",
+    "/home",
     "/profile",
     "/signup",
     "/login",
@@ -48,4 +48,4 @@ const publicPaths = [
 ];
 
 // these are paths which the user can visit only when logged in, cannot visit when logged out.
-const privatePaths = ["/dashboard", "/profile"];
+const privatePaths = ["/home", "/profile"];

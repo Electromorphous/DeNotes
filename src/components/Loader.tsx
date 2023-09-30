@@ -7,18 +7,18 @@ function Loader() {
         xmlns="http://www.w3.org/2000/svg"
         width="50"
         height="50"
-        viewBox="0 0 100 100"
+        viewBox="-5 -5 110 110"
         className="dark:invert"
       >
         <circle
           fill="none"
-          stroke="#000"
-          stroke-width="2"
+          stroke="#777"
+          strokeWidth="2"
           cx="50"
           cy="50"
           r="44"
         />
-        <circle fill="#000" stroke-width="3" cx="8" cy="54" r="7">
+        <circle fill="#000" strokeWidth="3" cx="8" cy="54" r="9">
           <animateTransform
             attributeName="transform"
             dur="2s"

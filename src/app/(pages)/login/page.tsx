@@ -25,7 +25,7 @@ function Login() {
       .post("/api/users/login", user)
       .then((res) => {
         console.log("Success", res.data);
-        router.push("/dashboard");
+        router.push("/home");
       })
       .catch((err) => console.error(err.response.data.message))
       .finally(() => setLoading(false));

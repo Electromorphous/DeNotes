@@ -21,27 +21,7 @@ const userSchema = new mongoose.Schema({
     default: false,
   },
   notes: {
-    type: [
-      {
-        title: {
-          type: String,
-          required: [true, "Please provide a title"],
-        },
-        cid: {
-          type: String,
-          required: [true, "Please provide a CID"],
-        },
-        createdAt: {
-          type: Date,
-          immutable: true,
-          default: () => Date.now(),
-        },
-        updatedAt: {
-          type: Date,
-          default: () => Date.now(),
-        },
-      },
-    ],
+    type: [String],
     require: [true, "Please provide notes array"],
   },
   forgotPasswordToken: String,

@@ -2,21 +2,22 @@
 import { useState } from "react";
 import Image from "next/image";
 
-type InputProps = {
+type PasswordProps = {
   props: any;
 };
 
-function Password({ props }: InputProps) {
+function Password({ props }: PasswordProps) {
   const [visible, setVisible] = useState(false);
 
   return (
     <div className="relative">
       <input
-        type={visible ? "text" : "password"}
-        className="w-full px-4 py-2 rounded-md mb-4 mt-1 transition-all outline-none bg-transparent border
-        border-zinc-500 focus:border-dark-primary
-        dark:border-zinc-600 dark:focus:border-light-primary"
         {...props}
+        type={visible ? "text" : "password"}
+        className={`w-full px-4 py-2 rounded-md mb-4 mt-1 transition-all outline-none bg-transparent border
+        border-zinc-500 focus:border-dark-primary
+        dark:border-zinc-600 dark:focus:border-light-primary
+        ${props.className}`}
       />
       <button
         type="button"

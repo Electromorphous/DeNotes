@@ -1,30 +1,19 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import axios from "axios";
+import UserDataType from "@/types/userDataType";
 
 type PropsType = {
   children: React.ReactNode;
 };
 
-const initUserData = {
-  name: "",
-  email: "",
-  password: "",
-  isVerified: false,
-  notes: [],
-  forgotPasswordToken: "",
-  forgotPasswordTokenExpiration: null,
-  verifyToken: "",
-  verifyTokenExpiration: null,
-};
-
-const UserContext = createContext(initUserData);
+const UserContext = createContext<UserDataType | null>(null);
 
 export function useUser() {
   return useContext(UserContext);
 }
 
 function UserProvider({ children }: PropsType) {
-  const [user, setUser] = useState(initUserData);
+  const [user, setUser] = useState<UserDataType | null>(null);
 
   const getUserData = async () => {
     await axios

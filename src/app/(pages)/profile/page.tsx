@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Button from "@/components/Button";
 import axios from "axios";
 import { useRouter } from "next/navigation";
@@ -32,7 +32,7 @@ function Profile() {
     // send verification mail
     await axios
       .post("/api/users/sendEmail", {
-        email: user.email,
+        email: user?.email || "",
         emailType: tokenType.VERIFY_USER,
       })
       .then((res) => {
@@ -46,7 +46,7 @@ function Profile() {
       <Header
         items={
           <>
-            {user.isVerified ? (
+            {user?.isVerified ? (
               <></>
             ) : (
               <Button
@@ -61,24 +61,24 @@ function Profile() {
           </>
         }
       />
-      <main className="pt-28 min-h-screen transition-all bg-light-primary text-dark-primary dark:bg-dark-primary dark:text-light-primary">
+      <main className="pt-32 min-h-screen transition-all bg-light-primary text-dark-primary dark:bg-dark-primary dark:text-light-primary">
         <div className="container mx-auto">
           <h1 className="text-3xl mb-16 text-center">Profile page</h1>
 
-          {user.email ? (
+          {user?.email ? (
             <table className="text-lg w-full max-w-xs mx-auto">
               <tbody>
                 <tr>
                   <td>Name</td>
-                  <td className="text-right">{user.name}</td>
+                  <td className="text-right">{user?.name}</td>
                 </tr>
                 <tr>
                   <td>Email</td>
-                  <td className="text-right">{user.email}</td>
+                  <td className="text-right">{user?.email}</td>
                 </tr>
                 <tr>
                   <td>isVerified</td>
-                  <td className="text-right">{user.isVerified.toString()}</td>
+                  <td className="text-right">{user?.isVerified.toString()}</td>
                 </tr>
               </tbody>
             </table>
