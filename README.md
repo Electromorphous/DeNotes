@@ -4,7 +4,11 @@ The world's first fully decentralised note-taking app powered by the [Interplane
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-## Getting Started
+## First Time Contributing
+
+Check out [this blog](https://electroblog.hashnode.dev/beginners-guide-to-github-opening-your-first-pull-request) for help with making contributions.
+
+## Running the app
 
 First, run the development server:
 
