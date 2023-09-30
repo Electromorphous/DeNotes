@@ -7,6 +7,7 @@ import Button from "@/components/Button";
 import Input from "@/components/Input";
 import Password from "@/components/Password";
 import ThemeButton from "@/components/ThemeButton";
+import { useUserUpdate } from "@/contexts/UserProvider";
 
 function Login() {
   const [user, setUser] = useState({
@@ -16,6 +17,7 @@ function Login() {
   const [loading, setLoading] = useState(false);
 
   const router = useRouter();
+  const userUpdate = useUserUpdate();
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
@@ -25,6 +27,7 @@ function Login() {
       .post("/api/users/login", user)
       .then((res) => {
         console.log("Success", res.data);
+        userUpdate(res.data.user);
         router.push("/home");
       })
       .catch((err) => console.error(err.response.data.message))

@@ -6,11 +6,15 @@ import Loader from "@/components/Loader";
 import { useRouter } from "next/navigation";
 import NoteDataType from "@/types/noteDataType";
 import Modal from "@/components/Modal";
+import { useUser } from "@/contexts/UserProvider";
 
 function Home() {
-  const [modalOpen, setModalOpen] = useState(true);
+  const [modalOpen, setModalOpen] = useState(false);
   const [noteData, setNoteData] = useState<NoteDataType | null>(null);
   const router = useRouter();
+  const user = useUser();
+
+  console.log(user);
 
   return (
     <>

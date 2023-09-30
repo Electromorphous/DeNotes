@@ -29,24 +29,24 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const tokenData = {
-      id: user._id,
-      name: user.name,
-      email,
-    };
-
-    const token = jwt.sign(tokenData, process.env.TOKEN_SECRET!, {
-      expiresIn: "1h",
-    });
-
     // create Nextjs response
     const response = NextResponse.json(
-      { message: "Login successful" },
+      { message: "Login successful", user: user },
       { status: 201 }
     );
 
+    // const tokenData = {
+    //   id: user._id,
+    //   name: user.name,
+    //   email,
+    // };
+
+    // const token = jwt.sign(tokenData, process.env.TOKEN_SECRET!, {
+    //   expiresIn: "1d",
+    // });
+
     // add cookies with token in the response
-    response.cookies.set("token", token, { httpOnly: true, sameSite: "lax" });
+    // response.cookies.set("token", token, { httpOnly: true, sameSite: "lax" });
 
     return response;
   } catch (err) {
