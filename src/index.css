@@ -1,3 +1,14 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  @font-face {
+    font-family: InclusiveSans;
+    src: url(/assets/fonts/Inclusive_Sans/InclusiveSans-Regular.ttf);
+  }
+  @font-face {
+    font-family: InclusiveSansItalic;
+    src: url(/assets/fonts/Inclusive_Sans/InclusiveSans-Italic.ttf);
+  }
+}

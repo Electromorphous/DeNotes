@@ -4,6 +4,9 @@ export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
+      fontFamily: {
+        sans: ["InclusiveSans", "system-ui", "sans-serif"],
+      },
       colors: {
         dark: {
           primary: "#09090b",
