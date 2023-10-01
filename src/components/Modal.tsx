@@ -1,13 +1,12 @@
 import { Dispatch, SetStateAction, useEffect } from "react";
-import Image from "next/image";
 import Button from "./Button";
 import NoteDataType from "@/types/noteDataType";
 import Input from "./Input";
 import Textarea from "./Textarea";
 
 interface Props {
-  noteData: NoteDataType | null;
-  setNoteData: Dispatch<SetStateAction<NoteDataType | null>>;
+  noteData: NoteDataType;
+  setNoteData: Dispatch<SetStateAction<NoteDataType>>;
   handleClose: () => void;
   handleSave: () => void;
   loading: boolean;
@@ -26,9 +25,9 @@ function Modal({
         handleClose();
       }
     };
-    window.addEventListener("keydown", handleEsc);
+    addEventListener("keydown", handleEsc);
     return () => {
-      window.removeEventListener("keydown", handleEsc);
+      removeEventListener("keydown", handleEsc);
     };
   }, []);
 
@@ -59,8 +58,13 @@ function Modal({
                 props={{
                   type: "text",
                   autoFocus: true,
-                  // value:{noteData.path.slice(0, -4)},
-                  onChange: (e: any) => {},
+                  value: noteData.title,
+                  onChange: (e: any) => {
+                    setNoteData((prev: NoteDataType) => ({
+                      ...prev,
+                      title: e.target.value,
+                    }));
+                  },
                   placeholder: "Title",
                   className: "text-xl",
                 }}
@@ -71,14 +75,19 @@ function Modal({
 
         <Textarea
           props={{
-            //   value:{noteData.content},
-            onChange: (e: any) => {},
+            value: noteData.content,
+            onChange: (e: any) => {
+              setNoteData((prev: NoteDataType) => ({
+                ...prev,
+                content: e.target.value,
+              }));
+            },
             placeholder: "Content",
           }}
         />
 
         <div className="flex items-center justify-between">
-          <p>Last update: {noteData?.updatedAt || "Now"}</p>
+          <p>Last update: {noteData.updatedAt || "Now"}</p>
           <p className="text-zinc-500">esc to close</p>
           <div className="flex items-center justify-center gap-3">
             <Button
@@ -89,7 +98,7 @@ function Modal({
                 disabled: loading,
               }}
             >
-              Save
+              {loading ? "Saving..." : "Save"}
             </Button>
           </div>
         </div>

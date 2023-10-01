@@ -24,8 +24,7 @@ function ThemeProvider({ children }: PropsType) {
   const [dark, setDark] = useState(true);
 
   useEffect(() => {
-    if (window.matchMedia("(prefers-color-scheme: dark)").matches)
-      setDark(true);
+    if (matchMedia("(prefers-color-scheme: dark)").matches) setDark(true);
     else setDark(false);
   }, []);
 

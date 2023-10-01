@@ -1,6 +1,5 @@
 // only for password
 import { useState } from "react";
-import Image from "next/image";
 
 type PasswordProps = {
   props: any;
@@ -27,13 +26,12 @@ function Password({ props }: PasswordProps) {
         style={{ padding: 7 }}
         onClick={() => setVisible((prev) => !prev)}
       >
-        <Image
+        <img
           src={visible ? "/assets/visible.svg" : "/assets/hidden.svg"}
           alt="Password visible"
           className="dark:invert"
           width={19}
           height={19}
-          priority
         />
       </button>
     </div>

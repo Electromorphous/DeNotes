@@ -1,6 +1,4 @@
-"use client";
-import { useTheme, useThemeUpdate } from "@/contexts/ThemeProvider";
-import Image from "next/image";
+import { useTheme, useThemeUpdate } from "../contexts/ThemeProvider";
 
 function ThemeButton() {
   const dark = useTheme();
@@ -13,7 +11,7 @@ function ThemeButton() {
     hover:bg-light-secondary focus:bg-light-secondary
     dark:hover:bg-dark-secondary dark:focus:bg-dark-secondary"
     >
-      <Image
+      <img
         src={dark ? "/assets/sun.svg" : "/assets/moon.svg"}
         width={30}
         height={30}
