@@ -9,7 +9,8 @@ interface Props {
   noteData: NoteType;
   setNoteData: Dispatch<SetStateAction<NoteType>>;
   handleClose: () => void;
-  handleSave: () => void;
+  handleCreate: () => void;
+  handleUpdate: () => void;
   saving: boolean;
 }
 
@@ -18,7 +19,8 @@ function Modal({
   noteData,
   setNoteData,
   handleClose,
-  handleSave,
+  handleCreate,
+  handleUpdate,
   saving,
 }: Props) {
   useEffect(() => {
@@ -92,11 +94,17 @@ function Modal({
           <div className="flex items-center justify-center gap-3">
             <Button
               props={{
-                onClick: handleSave,
+                onClick: isNew ? handleCreate : handleUpdate,
                 disabled: saving,
               }}
             >
-              {saving ? "Saving..." : "Save"}
+              {isNew
+                ? saving
+                  ? "Creating..."
+                  : "Create"
+                : saving
+                ? "Updating..."
+                : "Update"}
             </Button>
           </div>
         </div>

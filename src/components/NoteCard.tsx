@@ -19,8 +19,8 @@ function NoteCard({ noteData, setNoteData, handleOpen }: NoteProps) {
         handleOpen();
       }}
     >
-      <h1 className="text-xl">{noteData.title || <span>&nbsp;</span>}</h1>
-      <p>{noteData.content}</p>
+      <h1 className="text-xl">{noteData.title || <>&nbsp;</>}</h1>
+      <p>{noteData.content || <>&nbsp;</>}</p>
     </button>
   );
 }

@@ -21,33 +21,33 @@ function Home() {
   const [notes, setNotes] = useState<NoteType[]>([]);
   const [uris, setUris] = useState<string[]>([]);
   const [modalOpen, setModalOpen] = useState(false);
-  const [isNew, setIsNew] = useState(false);
+  const [noteIndex, setNoteIndex] = useState<number | null>(null);
   const [saving, setSaving] = useState(false);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   const storage = useStorage();
 
   useEffect(() => {
     const retrieveData = async () => {
+      setNotes([]);
       uris.forEach(async (uri) => {
         const data = await storage?.downloadJSON(uri);
         data.cid = uri.substring(7);
         setNotes((prev) => [...prev, data]);
       });
+
+      setLoading(false);
     };
 
     retrieveData();
   }, [uris]);
 
-  // console.log("notes", notes);
-  // console.log("uris", uris);
-
   const handleClose = () => {
     setModalOpen(false);
-    setIsNew(false);
+    setNoteIndex(null);
   };
 
-  const handleSave = async () => {
+  const handleCreate = async () => {
     if (!noteData.title && !noteData.content) {
       handleClose();
       return;
@@ -61,7 +61,7 @@ function Home() {
     const time = JSON.stringify(new Date());
     const trimmedTime = time.substring(1, time.length - 1);
 
-    if (isNew) data.createdAt = trimmedTime;
+    data.createdAt = trimmedTime;
     data.updatedAt = trimmedTime;
 
     const _uris = await storage?.uploadBatch([data]);
@@ -75,15 +75,50 @@ function Home() {
     setNoteData(initNote);
   };
 
+  const handleUpdate = async () => {
+    if (!noteData.title && !noteData.content) {
+      handleClose();
+      return;
+    }
+
+    setSaving(true);
+
+    // removing CID from data to be uploaded
+    const { cid, ...data } = noteData;
+
+    const time = JSON.stringify(new Date());
+    const trimmedTime = time.substring(1, time.length - 1);
+
+    data.updatedAt = trimmedTime;
+
+    const _uris = await storage?.uploadBatch([data]);
+    setUris((prev: string[]) => {
+      // if (_uris?.length) return [...prev, ..._uris];
+      // return prev;
+
+      return prev.map((uri, i) => {
+        if (i === noteIndex) {
+          return _uris?.length ? _uris[0] : "";
+        }
+        return uri;
+      });
+    });
+
+    handleClose();
+    setSaving(false);
+    setNoteData(initNote);
+  };
+
   return (
     <>
       {modalOpen ? (
         <Modal
-          isNew={isNew}
+          isNew={noteIndex === null}
           noteData={noteData}
           setNoteData={setNoteData}
           handleClose={handleClose}
-          handleSave={handleSave}
+          handleCreate={handleCreate}
+          handleUpdate={handleUpdate}
           saving={saving}
         />
       ) : (
@@ -95,7 +130,7 @@ function Home() {
             <Button
               props={{
                 onClick: () => {
-                  setIsNew(true);
+                  setNoteIndex(null);
                   setModalOpen(true);
                 },
               }}
@@ -124,7 +159,10 @@ function Home() {
                     key={i}
                     noteData={note}
                     setNoteData={setNoteData}
-                    handleOpen={() => setModalOpen(true)}
+                    handleOpen={() => {
+                      setNoteIndex(i);
+                      setModalOpen(true);
+                    }}
                   />
                 ))}
               </div>
