@@ -1,5 +1,3 @@
-import React from "react";
-
 function Background() {
   return (
     <div
@@ -8,7 +6,7 @@ function Background() {
               bg-transparent text-black dark:text-light-primary
               opacity-20 select-none z-0"
     >
-      <h1 className="text-6xl">DeNotes</h1>
+      <h1 className="text-5xl">DeNotes</h1>
       <p className="text-xl">A fully decentralised note-taking app</p>
     </div>
   );

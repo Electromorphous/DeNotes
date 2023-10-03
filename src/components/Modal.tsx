@@ -3,6 +3,7 @@ import Button from "./Button";
 import NoteType from "../types/NoteType";
 import Input from "./Input";
 import Textarea from "./Textarea";
+import dateToString from "../utilities/DateToString";
 
 interface Props {
   isNew: boolean;
@@ -86,7 +87,8 @@ function Modal({
 
         <div className="flex items-center justify-between">
           <p>
-            Last update: {isNew ? "Now" : `${new Date(noteData.updatedAt)}`}
+            Last update:{" "}
+            {isNew ? "Now" : `${dateToString(new Date(noteData.updatedAt))}`}
           </p>
 
           <p className="text-zinc-500">esc to close</p>
