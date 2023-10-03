@@ -11,10 +11,12 @@ export default {
         dark: {
           primary: "#09090b",
           secondary: "#27272a",
+          notebg: "#18181b",
         },
         light: {
           primary: "#e4e4e7",
           secondary: "#d4d4d8",
+          notebg: "#f4f4f5",
         },
       },
     },

@@ -1,23 +1,25 @@
 import { Dispatch, SetStateAction, useEffect } from "react";
 import Button from "./Button";
-import NoteDataType from "@/types/noteDataType";
+import NoteType from "../types/NoteType";
 import Input from "./Input";
 import Textarea from "./Textarea";
 
 interface Props {
-  noteData: NoteDataType;
-  setNoteData: Dispatch<SetStateAction<NoteDataType>>;
+  isNew: boolean;
+  noteData: NoteType;
+  setNoteData: Dispatch<SetStateAction<NoteType>>;
   handleClose: () => void;
   handleSave: () => void;
-  loading: boolean;
+  saving: boolean;
 }
 
 function Modal({
+  isNew,
   noteData,
   setNoteData,
   handleClose,
   handleSave,
-  loading,
+  saving,
 }: Props) {
   useEffect(() => {
     const handleEsc = (e: KeyboardEvent) => {
@@ -41,43 +43,37 @@ function Modal({
 
       <div
         className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2
-        p-6 w-11/12 md:w-9/12 
+        px-6 py-4 w-11/12 md:w-9/12 
         rounded-lg shadow-md z-20
-        bg-zinc-100 text-dark-primary dark:bg-zinc-900 dark:text-light-primary"
+        bg-light-notebg text-dark-primary dark:bg-dark-notebg dark:text-light-primary"
       >
         <div>
-          <div>
-            <div
-              style={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "flex-start",
-              }}
-            >
-              <Input
-                props={{
-                  type: "text",
-                  autoFocus: true,
-                  value: noteData.title,
-                  onChange: (e: any) => {
-                    setNoteData((prev: NoteDataType) => ({
-                      ...prev,
-                      title: e.target.value,
-                    }));
-                  },
-                  placeholder: "Title",
-                  className: "text-xl",
-                }}
-              />
-            </div>
-          </div>
+          <p className="text-zinc-500 mb-3">
+            CID: {noteData.cid || "Not assigned"}
+          </p>
         </div>
+
+        <Input
+          props={{
+            type: "text",
+            autoFocus: true,
+            value: noteData.title,
+            onChange: (e: any) => {
+              setNoteData((prev: NoteType) => ({
+                ...prev,
+                title: e.target.value,
+              }));
+            },
+            placeholder: "Title",
+            className: "text-2xl",
+          }}
+        />
 
         <Textarea
           props={{
             value: noteData.content,
             onChange: (e: any) => {
-              setNoteData((prev: NoteDataType) => ({
+              setNoteData((prev: NoteType) => ({
                 ...prev,
                 content: e.target.value,
               }));
@@ -87,18 +83,20 @@ function Modal({
         />
 
         <div className="flex items-center justify-between">
-          <p>Last update: {noteData.updatedAt || "Now"}</p>
+          <p>
+            Last update: {isNew ? "Now" : `${new Date(noteData.updatedAt)}`}
+          </p>
+
           <p className="text-zinc-500">esc to close</p>
+
           <div className="flex items-center justify-center gap-3">
             <Button
               props={{
-                onClick: {
-                  //   noteData.path.slice(0, -4) && noteData.content ? handleSave : () => {}
-                },
-                disabled: loading,
+                onClick: handleSave,
+                disabled: saving,
               }}
             >
-              {loading ? "Saving..." : "Save"}
+              {saving ? "Saving..." : "Save"}
             </Button>
           </div>
         </div>

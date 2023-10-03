@@ -13,7 +13,7 @@ function ThemeButton() {
     >
       {dark ? (
         <img
-          src={"/assets/sun.svg"}
+          src={"/assets/moon.svg"}
           width={30}
           height={30}
           alt="Toggle theme"
@@ -21,7 +21,7 @@ function ThemeButton() {
         />
       ) : (
         <img
-          src={"/assets/moon.svg"}
+          src={"/assets/sun.svg"}
           width={30}
           height={30}
           alt="Toggle theme"
