@@ -91,7 +91,7 @@ function Modal({
             {isNew ? "Now" : `${dateToString(new Date(noteData.updatedAt))}`}
           </p>
 
-          <p className="text-zinc-500">esc to close</p>
+          <p className="text-zinc-500 select-none">esc to close</p>
 
           <div className="flex items-center justify-center gap-3">
             <Button

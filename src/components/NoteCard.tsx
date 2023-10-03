@@ -10,7 +10,7 @@ type NoteProps = {
 function NoteCard({ noteData, setNoteData, handleOpen }: NoteProps) {
   return (
     <button
-      className="transition-all px-4 py-2 rounded-md shadow-md text-left outline-none
+      className="transition-all px-5 py-3 pb-6 rounded-md shadow-md text-left outline-none
       bg-light-notebg text-dark-primary dark:bg-dark-notebg dark:text-light-primary
       cursor-pointer hover:-translate-y-1 hover:shadow-lg
       focus:-translate-y-1 focus:shadow-lg"
@@ -19,7 +19,7 @@ function NoteCard({ noteData, setNoteData, handleOpen }: NoteProps) {
         handleOpen();
       }}
     >
-      <h1 className="text-xl">{noteData.title || <>&nbsp;</>}</h1>
+      <h1 className="text-3xl">{noteData.title || <>&nbsp;</>}</h1>
       <p>{noteData.content || <>&nbsp;</>}</p>
     </button>
   );

@@ -43,6 +43,7 @@ function Home() {
   }, [uris]);
 
   const handleClose = () => {
+    if (noteIndex !== null) setNoteData(initNote);
     setModalOpen(false);
     setNoteIndex(null);
   };
@@ -72,7 +73,6 @@ function Home() {
 
     handleClose();
     setSaving(false);
-    setNoteData(initNote);
   };
 
   const handleUpdate = async () => {
@@ -93,9 +93,6 @@ function Home() {
 
     const _uris = await storage?.uploadBatch([data]);
     setUris((prev: string[]) => {
-      // if (_uris?.length) return [...prev, ..._uris];
-      // return prev;
-
       return prev.map((uri, i) => {
         if (i === noteIndex) {
           return _uris?.length ? _uris[0] : "";
@@ -106,7 +103,6 @@ function Home() {
 
     handleClose();
     setSaving(false);
-    setNoteData(initNote);
   };
 
   return (
