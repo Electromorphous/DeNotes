@@ -1,4 +1,4 @@
-# DeNotes
+# [DeNotes](https://earnest-churros-9ff8e8.netlify.app/)
 
 A fully decentralised note-taking app powered by the [Interplanetary File System](https://ipfs.io) and the implementation done by [ThirdWeb](https://portal.thirdweb.com/storage).
 
