@@ -6,8 +6,10 @@ function Background() {
               bg-transparent text-black dark:text-white
               opacity-10 select-none z-0"
     >
-      <h1 className="text-5xl">DeNotes</h1>
-      <p className="text-xl">A fully decentralised note-taking app</p>
+      <h1 className="text-3xl md:text-5xl">DeNotes</h1>
+      <p className="text-md md:text-xl">
+        A fully decentralised note-taking app
+      </p>
     </div>
   );
 }

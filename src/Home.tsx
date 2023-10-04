@@ -22,7 +22,7 @@ function Home() {
   const [notes, setNotes] = useState<NoteType[]>([]);
   const [uris, setUris] = useState<string[]>([]);
   const [modalOpen, setModalOpen] = useState(false);
-  const [noteIndex, setNoteIndex] = useState<number | null>(null);
+  const [selectedUri, setSelectedUri] = useState<string>("");
   const [saving, setSaving] = useState(false);
   const [loading, setLoading] = useState(true);
 
@@ -30,9 +30,9 @@ function Home() {
   const { getCookie, updateCookie } = useCookie();
 
   useEffect(() => {
-    const cook = getCookie();
-    if (cook?.length) {
-      setUris(cook);
+    const cookie = getCookie();
+    if (cookie?.length) {
+      setUris(cookie);
     }
   }, []);
 
@@ -56,9 +56,9 @@ function Home() {
   };
 
   const handleClose = () => {
-    if (noteIndex !== null) setNoteData(initNote);
+    if (selectedUri !== null) setNoteData(initNote);
     setModalOpen(false);
-    setNoteIndex(null);
+    setSelectedUri("");
   };
 
   const handleCreate = async () => {
@@ -107,8 +107,8 @@ function Home() {
 
     const _uris = await storage?.uploadBatch([data]);
     setUris((prev: string[]) => {
-      return prev.map((uri, i) => {
-        if (i === noteIndex) {
+      return prev.map((uri) => {
+        if (uri === selectedUri) {
           return _uris?.length ? _uris[0] : "";
         }
         return uri;
@@ -120,16 +120,29 @@ function Home() {
     setNoteData(initNote);
   };
 
+  const handleDelete = () => {
+    setUris((prev) =>
+      prev.filter((uri) => {
+        // console.log("i", i);
+        // console.log("selectedUri", selectedUri);
+        return uri !== selectedUri;
+      })
+    );
+    handleClose();
+    setNoteData(initNote);
+  };
+
   return (
     <>
       {modalOpen ? (
         <Modal
-          isNew={noteIndex === null}
+          isNew={!selectedUri}
           noteData={noteData}
           setNoteData={setNoteData}
           handleClose={handleClose}
           handleCreate={handleCreate}
           handleUpdate={handleUpdate}
+          handleDelete={handleDelete}
           saving={saving}
         />
       ) : (
@@ -141,7 +154,7 @@ function Home() {
             <Button
               props={{
                 onClick: () => {
-                  setNoteIndex(null);
+                  setSelectedUri("");
                   setModalOpen(true);
                 },
               }}
@@ -171,7 +184,7 @@ function Home() {
                     noteData={note}
                     setNoteData={setNoteData}
                     handleOpen={() => {
-                      setNoteIndex(i);
+                      setSelectedUri(`ipfs://${note.cid}`);
                       setModalOpen(true);
                     }}
                   />
