@@ -31,7 +31,7 @@ function Home() {
 
   useEffect(() => {
     const cook = getCookie();
-    if (cook.length) {
+    if (cook?.length) {
       setUris(cook);
     }
   }, []);
