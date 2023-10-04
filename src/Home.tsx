@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useStorage } from "@thirdweb-dev/react";
 import Button from "./components/Button";
 import Header from "./components/Header";
@@ -7,6 +7,7 @@ import Modal from "./components/Modal";
 import NoteType from "./types/NoteType";
 import NoteCard from "./components/NoteCard";
 import Background from "./components/Background";
+import { useCookie } from "./contexts/CookieProvider";
 
 const initNote = {
   cid: "",
@@ -26,21 +27,32 @@ function Home() {
   const [loading, setLoading] = useState(true);
 
   const storage = useStorage();
+  const { cookies, updateCookie } = useCookie();
 
   useEffect(() => {
-    const retrieveData = async () => {
-      setNotes([]);
-      uris.forEach(async (uri) => {
-        const data = await storage?.downloadJSON(uri);
-        data.cid = uri.substring(7);
-        setNotes((prev) => [...prev, data]);
-      });
+    if (cookies?.uris) {
+      setUris(cookies.uris);
+    }
+  }, []);
 
-      setLoading(false);
-    };
-
+  useEffect(() => {
+    setLoading(true);
+    updateCookie(JSON.stringify(uris));
     retrieveData();
   }, [uris]);
+
+  useEffect(() => {
+    if (uris.length === notes.length) setLoading(false);
+  }, [uris.length, notes.length]);
+
+  const retrieveData = async () => {
+    setNotes([]);
+    uris.forEach(async (uri) => {
+      const data = await storage?.downloadJSON(uri);
+      data.cid = uri.substring(7);
+      setNotes((prev) => [...prev, data]);
+    });
+  };
 
   const handleClose = () => {
     if (noteIndex !== null) setNoteData(initNote);
@@ -73,6 +85,7 @@ function Home() {
 
     handleClose();
     setSaving(false);
+    setNoteData(initNote);
   };
 
   const handleUpdate = async () => {
@@ -103,6 +116,7 @@ function Home() {
 
     handleClose();
     setSaving(false);
+    setNoteData(initNote);
   };
 
   return (
@@ -138,6 +152,7 @@ function Home() {
       />
       <main className="p-7 pt-24 min-h-screen transition-all bg-light-primary text-dark-primary dark:bg-dark-primary dark:text-light-primary">
         <div className="container mx-auto">
+          <Background />
           {loading ? (
             <div className="flex flex-col items-center justify-center h-72">
               <Loader />
@@ -145,7 +160,6 @@ function Home() {
             </div>
           ) : (
             <>
-              <Background />
               <div
                 className="relative grid gap-4 z-10
                sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 "
