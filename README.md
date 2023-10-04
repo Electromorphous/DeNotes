@@ -23,7 +23,7 @@ In the cookies of your browser. Only DeNotes will be able to access these cookie
 
 ## Won't the CIDs take up too much space in the cookies?
 
-They are not stored as plain text. They have been stringified and encrypted using the AES algorithm and a secret key from the environment variables. The app uses it by decrypting the cookie using the same key. So even if the cookies get leaked, nobody can make sense of it without knowing the encryption key. And it takes up much lesser storage this way.
+They are not stored as plain text. They have been stringified and encrypted using the AES algorithm and a secret key from the environment variables. The app uses it by decrypting the cookie using the same key. So even if the cookies get leaked, nobody can make sense of it without knowing the encryption key. And it takes up slightly lesser storage this way.
 
 ## What if I clear the cookies?
 
