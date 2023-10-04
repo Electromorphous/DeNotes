@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useStorage } from "@thirdweb-dev/react";
 import Button from "./components/Button";
 import Header from "./components/Header";
@@ -27,17 +27,18 @@ function Home() {
   const [loading, setLoading] = useState(true);
 
   const storage = useStorage();
-  const { cookies, updateCookie } = useCookie();
+  const { getCookie, updateCookie } = useCookie();
 
   useEffect(() => {
-    if (cookies?.uris) {
-      setUris(cookies.uris);
+    const cook = getCookie();
+    if (cook.length) {
+      setUris(cook);
     }
   }, []);
 
   useEffect(() => {
     setLoading(true);
-    updateCookie(JSON.stringify(uris));
+    updateCookie(uris);
     retrieveData();
   }, [uris]);
 
