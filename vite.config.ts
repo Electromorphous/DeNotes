@@ -1,16 +1,11 @@
-import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
+import { defineConfig } from "vite";
+import { nodePolyfills } from "vite-plugin-node-polyfills";
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react()],
-  define: { global: {} },
-  optimizeDeps: {
-    esbuildOptions: {
-      // Node.js global to browser globalThis
-      define: {
-        global: "globalThis",
-      },
-    },
+  plugins: [react(), nodePolyfills()],
+  define: {
+    "process.env": {},
   },
 });
