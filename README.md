@@ -13,7 +13,7 @@ You can even see your notes if you copy the CID provided by this app and paste i
 - https://cloudflare-ipfs.com/ipfs/QmVVUyE2SdHRwu2WM45XHHsiiT3WqW6Giwf4mW4XabKGHy/rick.jpeg
 - https://ipfs.io/ipfs/QmVVUyE2SdHRwu2WM45XHHsiiT3WqW6Giwf4mW4XabKGHy/rick.jpeg
 
-These cloudflare-ipfs.com and ipfs.io are known as **public gateways** and there are many of those. You must only go to `https://ipfs.io/ipfs/${cid}` to see your data (or some other public gateway).
+These `cloudflare-ipfs.com` and `ipfs.io` are known as **public gateways** and there are many of those. You must only go to `https://ipfs.io/ipfs/${cid}` to see your data (or some other public gateway).
 
 For a more clear picture of IPFS and content-based addressing, please go through [this short blog post](https://electroblog.hashnode.dev/beginners-guide-to-ipfs).
 
