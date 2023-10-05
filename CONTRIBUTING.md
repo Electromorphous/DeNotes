@@ -27,3 +27,11 @@ bun dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
+## Environment variables
+
+Head to the [Thirdweb dashboard](https://thirdweb.com/dashboard/settings) and make an API key. In order to do that, you need to have a Web3 Wallet and an account on Thirdweb. This page will guide you through it so you can set it up in a few minutes.
+
+After creating your API key, you will get a Client ID along with it. Create a `.env` file and paste it there. Refer the `.example.env` file.
+
+For the encryption key, use any string you like.
